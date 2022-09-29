@@ -1,0 +1,38 @@
+﻿<Window x:Class="_211_JumabekovDarkhan_3_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_211_JumabekovDarkhan_3_1"
+        mc:Ignorable="d"
+        Title="Sign in" Height="650" Width="650" Background="LightGray">
+    <StackPanel Margin="100, 50, 100, 100" Background="LightGray">
+        <StackPanel Margin="10, 5, 10, 10" Background="White" >
+            <StackPanel Orientation="Vertical" Margin="30,0,0,20"  HorizontalAlignment="Left" Background="White" >
+                <Label Content="Sign in" FontFamily="Tahoma" FontSize="30" FontWeight="Bold" Padding="0,30,0,5"/>
+                <Label Content="Access your account" FontFamily="Tahoma" FontSize="30" FontWeight="Bold"/>
+                <Label Content="Email adress" FontFamily="Tahoma" FontSize="16" FontWeight="Medium" Height="60" VerticalContentAlignment="Bottom"/>
+                <TextBox FontSize="14" Padding="5" HorizontalAlignment="Stretch" Margin="5"/>
+                <Label Content="Password" FontFamily="Tahoma" FontSize="16" FontWeight="Medium" Height="60" VerticalContentAlignment="Bottom"/>
+                <TextBox FontSize="14" Padding="5" HorizontalAlignment="Stretch" Margin="5"/>
+                <TextBlock FontFamily="Tahoma" Foreground="DodgerBlue" HorizontalAlignment="Right" Margin="0,5,5,0">
+                    <Hyperlink>Show password</Hyperlink>
+                </TextBlock>
+                <Button Content="Sign in" Background="DodgerBlue" Foreground="White" BorderThickness="0" Width="100" Padding="7" FontFamily="Tahoma" FontSize="16" FontWeight="UltraBold" HorizontalAlignment="Left" Margin="5,0,0,0">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBlock FontFamily="Tahoma" Foreground="DodgerBlue" HorizontalAlignment="Left" Margin="5,10">
+                    <Hyperlink>Forgot password?</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock FontFamily="Tahoma" FontWeight="Medium" HorizontalAlignment="Center" Margin="5,5">
+             <Run Text="Don't have an account? "/>
+             <Hyperlink>Create your account now.</Hyperlink>
+        </TextBlock>
+    </StackPanel>
+</Window>

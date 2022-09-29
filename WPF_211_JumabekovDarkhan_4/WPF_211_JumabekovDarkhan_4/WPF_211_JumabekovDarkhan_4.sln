@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_211_JumabekovDarkhan_4_1", "WPF_211_JumabekovDarkhan_4_1\WPF_211_JumabekovDarkhan_4_1.csproj", "{F2D3625E-09FF-48FB-8056-866BEED8B00C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_211_JumabekovDarkhan_4_2", "WPF_211_JumabekovDarkhan_4_2\WPF_211_JumabekovDarkhan_4_2.csproj", "{3847C89D-28ED-4B6D-99FD-03E7880D81EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2D3625E-09FF-48FB-8056-866BEED8B00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D3625E-09FF-48FB-8056-866BEED8B00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D3625E-09FF-48FB-8056-866BEED8B00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D3625E-09FF-48FB-8056-866BEED8B00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3847C89D-28ED-4B6D-99FD-03E7880D81EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3847C89D-28ED-4B6D-99FD-03E7880D81EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3847C89D-28ED-4B6D-99FD-03E7880D81EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3847C89D-28ED-4B6D-99FD-03E7880D81EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEF2364E-2C2D-46A9-A96F-A05804AC6A59}
+	EndGlobalSection
+EndGlobal

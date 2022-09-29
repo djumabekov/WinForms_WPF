@@ -1,0 +1,166 @@
+﻿<Window x:Class="WPF_211_JumabekovDarkhan_12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_211_JumabekovDarkhan_12"
+        xmlns:locz="clr-namespace:WPF_211_JumabekovDarkhan_12.Properties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Canvas x:Name="MainStack"  Height="450" Width="800">
+        <Image Source="/Media/fon.png" Panel.ZIndex="0" Height="450" Width="800"/>
+        <Border Style="{StaticResource BorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" CornerRadius="15,0,0,15">
+                    <Border.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="/Media/key.png"/>
+                    </Border.Background>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="15, 10, 20, 15">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label Content="{x:Static locz:Resources.lang}" FontSize="10"  Foreground="DarkSlateGray"/>
+                        <ComboBox x:Name="LangSelector" Width="50" FontSize="10"  Foreground="DarkSlateGray" SelectionChanged="ComboBox_SelectionChanged">
+                          <ComboBoxItem Tag="ru-RU"  Content="{x:Static locz:Resources.ru}"/>
+                           <ComboBoxItem Tag="en-EN" Content="{x:Static locz:Resources.en}" />
+                        </ComboBox>
+                    </StackPanel>
+                    <Label Content="{x:Static locz:Resources.signUp}" FontSize="30" FontWeight="Bold"/>
+                    <Label Content="{x:Static locz:Resources.fillInform}" Style="{StaticResource LabelStyle}"/>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static locz:Resources.fullName}"  Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="UserFullName" Text="{Binding FullName}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyle}"/>
+                        <Image Grid.Row="0" Grid.Column="2" Source="/Media/ok.png" Style="{StaticResource IcoStyle}"/>
+                        <Separator Style="{StaticResource SeparatorStyle}"/>
+                    </Grid>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static locz:Resources.email}"  Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="UserEmail" Text="{Binding Email}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyle}"/>
+                        <Image Grid.Row="0" Grid.Column="2" Source="/Media/ok.png" Style="{StaticResource IcoStyle}"/>
+                        <Separator Style="{StaticResource SeparatorStyle}"/>
+                    </Grid>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static locz:Resources.phone}"  Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="UserPhone" Text="{Binding Phone}" Grid.Row="0" Grid.Column="1"  Style="{StaticResource TextBoxStyle}"/>
+                        <Separator Style="{StaticResource SeparatorStyle}"/>
+                    </Grid>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static locz:Resources.password}"  Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="UserPassword" Text="{Binding Password}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyle}"/>
+                        <Image Grid.Row="0" Grid.Column="2" Source="/Media/wrong.png" Style="{StaticResource IcoStyle}"/>
+                        <Separator Style="{StaticResource SeparatorStyle}"/>
+                    </Grid>
+                    <Grid Margin="0,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static locz:Resources.website}" Style="{StaticResource LabelStyle}"/>
+                        <TextBox x:Name="UserWebsite" Text="{Binding Website}" Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxStyle}"/>
+                        <Separator Style="{StaticResource SeparatorStyle}"/>
+                    </Grid>
+                    <RadioButton x:Name="UserAcceptRules" IsChecked ="{Binding AcceptRules}" Margin="0, 3" VerticalContentAlignment="Center">
+                        <TextBlock  Style="{StaticResource TextBlockStyle}">
+                            <Run Text="{x:Static locz:Resources.iAccept}"/>
+                            <Hyperlink> 
+                                <TextBlock Text="{x:Static locz:Resources.termsAndConditions}"/> 
+                            </Hyperlink>
+                            <Run Text="{x:Static locz:Resources.andPrivacyPolicy}"/>
+                        </TextBlock>
+                    </RadioButton>
+
+                    <Button Content="{x:Static locz:Resources.login}" Style="{StaticResource ButtonStyle}" Command="{Binding LoginCmd}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="16"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="DarkSlateGray" Direction="270" Softness="1" ShadowDepth="15" Opacity="0.3" />
+                        </Button.BitmapEffect>
+                    </Button>
+                    <TextBlock Text="{x:Static locz:Resources.loginSocialMedia}"  Style="{StaticResource TextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <Button Margin="0" Style="{StaticResource SocialButtonStyle}" CommandParameter="{Binding SocialMediaLinks[0]}" Command="{Binding GoSocialMediaCmd}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="16"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image Source="/Media/facebook.png"/>
+                        </Button>
+                        <Button Style="{StaticResource SocialButtonStyle}" CommandParameter="{Binding SocialMediaLinks[1]}" Command="{Binding GoSocialMediaCmd}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="16"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image Source="/Media/twitter.png"/>
+                        </Button>
+                        <Button Style="{StaticResource SocialButtonStyle}"  CommandParameter="{Binding SocialMediaLinks[2]}" Command="{Binding GoSocialMediaCmd}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="16"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image Source="/Media/youtube.png"/>
+                        </Button>
+                        <Button Style="{StaticResource SocialButtonStyle}"   CommandParameter="{Binding SocialMediaLinks[3]}" Command="{Binding GoSocialMediaCmd}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="16"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image Source="/Media/linkedin.png"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+    </Canvas>
+</Window>
