@@ -1,0 +1,91 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UserJournal">
+
+    <Color x:Key="BackgroundColor"  R="0" G="0" B="0" A="255"/>
+    <SolidColorBrush x:Key="BackgroundColorBrush" Color="{StaticResource BackgroundColor}"/>
+
+    <Color x:Key="GridBackgroundColor"  R="92" G="70" B="62" A="255"/>
+    <SolidColorBrush x:Key="GridBackgroundColorBrush" Color="{StaticResource GridBackgroundColor}"/>
+
+    <Color x:Key="TextColor"  R="255" G="255" B="255" A="255"/>
+    <SolidColorBrush x:Key="TextColorBrush" Color="{StaticResource TextColor}"/>
+    
+       
+    <Style x:Key="GridStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource GridBackgroundColorBrush}" />
+    </Style>
+
+    <Style x:Key="GroupBoxStyle" TargetType="GroupBox">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        
+    </Style>
+
+
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0,0,0,353" />
+    </Style>
+
+    <Style x:Key="LabelCntStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style x:Key="LabelUDPStyle" TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+    </Style>
+
+    <Style x:Key="ListViewStyle" TargetType="ListView">
+        <Setter Property="Height" Value="300" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Background" Value="{StaticResource BackgroundColorBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+
+    </Style>
+
+    <Style x:Key="BorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="Height" Value="50" />
+    </Style>
+    
+    <Style x:Key="BorderUDPStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="100" />
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Width" Value="100" />
+    </Style>
+
+    <Style x:Key="StackPanelStyle" TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,0" />
+    </Style>
+
+    <Style x:Key="ButtonUDPStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        <Setter Property="Background" Value="{StaticResource BackgroundColorBrush}" />
+    </Style>
+    
+    
+    
+</ResourceDictionary>

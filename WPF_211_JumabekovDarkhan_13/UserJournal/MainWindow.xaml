@@ -1,0 +1,99 @@
+﻿<Window x:Class="UserJournal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserJournal"
+        xmlns:models="clr-namespace:UserJournal.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450"
+        Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:BoolToVisibilityConverter
+            x:Key="boolToVisibilityConverter"/>
+        <local:BoolToProgressStateConverter
+            x:Key="boolToProgressStateCnvtr"/>
+    </Window.Resources>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo
+            Description="{Binding SelectedItem.name}"
+            ProgressState="{Binding IsLoading
+            , Converter={StaticResource boolToProgressStateCnvtr}}"/>
+    </Window.TaskbarItemInfo>
+    <Grid Style="{DynamicResource GridStyle}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Users"
+                  Style="{DynamicResource GroupBoxStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label 
+                    Content="{Binding UserCount}"
+                       Style="{DynamicResource LabelCntStyle}"/>
+                <ListView
+                    Style="{DynamicResource ListViewStyle}"
+                    x:Name="MyListV"
+                    Grid.Row="1"
+                    SelectedItem="{Binding SelectedItem}"
+                    ItemsSource="{Binding RootItem.results}"
+                   Grid.ColumnSpan="2"
+                    >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:Result}">
+                            <!--разметка одного элемента в списке-->
+                            <Grid Margin="0 6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <Border  Style="{DynamicResource BorderStyle}">
+                                    <Border.Background>
+                                        <ImageBrush Stretch="Fill" ImageSource="{Binding picture.medium}"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock
+                                    Grid.Column="1"
+                                   Style="{DynamicResource TextBlockStyle}"
+                                    Text="{Binding name}"
+                                    />
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ComboBox x:Name="styleBox" Grid.Row="3"/>
+                <StackPanel
+                    Panel.ZIndex="1"
+                    Visibility="{Binding IsLoading
+                    , Converter={StaticResource boolToVisibilityConverter}}" Grid.ColumnSpan="2" Margin="0,0,0,353" Grid.RowSpan="2">
+                    <TextBlock
+                        Text="Wait..."/>
+                    <ProgressBar
+                        IsIndeterminate="True"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Style="{DynamicResource GroupBoxStyle}"
+            DataContext="{Binding ElementName=MyListV
+            , Path=SelectedItem}"
+         
+                  Grid.Column="1"
+                  Header="User Detail">
+            <Frame Source="./Views/UserDetailPage.xaml"/>
+        </GroupBox>
+        
+    </Grid>
+</Window>
