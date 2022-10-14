@@ -1,0 +1,163 @@
+﻿<Window x:Class="OpenWeatherWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenWeatherWPF"
+        xmlns:loc1="clr-namespace:OpenWeatherWPF.Views"
+        xmlns:loc2="clr-namespace:OpenWeatherWPF.ViewModels"
+        xmlns:locz="clr-namespace:OpenWeatherWPF.Properties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <loc1:BoolToVisibilityConverter
+            x:Key="boolToVisibilityConverter"/>
+        <loc1:SelectComboboxIndexConverter
+            x:Key="selectComboboxIndexConverter"/>
+        <DataTemplate x:Key="ViewWeather" DataType="{x:Type loc2:OwViewModel}">
+            <loc1:Weather />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ViewForecast" DataType="{x:Type loc2:OwViewModel}">
+            <loc1:Forecast />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ViewInfo" DataType="{x:Type loc2:OwViewModel}">
+            <loc1:Info />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Left">
+
+            <Label Content="{x:Static locz:Resources.Cities}" FontWeight="Black"/>
+            <StackPanel Orientation="Horizontal">
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderSearchInputStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox 
+                        Tag="{x:Static locz:Resources.Search}"
+                        Text="{x:Static locz:Resources.Search}"
+                        x:Name="txtFilter" 
+                        GotFocus="RemoveText" LostFocus="AddText"
+                        TextChanged="txtFilter_TextChanged"
+                        Style="{StaticResource SearchInputStyle}"/>
+
+                        <Button Style="{StaticResource SearchButtonStyle}" Command="{Binding FilterCitiesCmd}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="20"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image Source="/Views/Media/loupe.png" HorizontalAlignment="Left"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Button Style="{StaticResource CLearButtonStyle}" Visibility="{Binding ElementName=txtFilter, Path=Text, Converter={StaticResource boolToVisibilityConverter}}" CommandParameter="{Binding ElementName=txtFilter}" Command="{Binding ClearTxtFilter}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="20"/>
+                        </Style>
+                    </Button.Resources>
+                    <Image Source="/Views/Media/clear.png" HorizontalAlignment="Left"/>
+                </Button>
+            </StackPanel>
+            <Border Style="{StaticResource BorderCityListStyle}">
+                <ListView Style="{StaticResource CityListStyle}"
+            Grid.Column="0"
+            x:Name="CitiesListV"
+            SelectedItem="{Binding SelectedCityItem}"
+            ItemsSource="{Binding FilteredCityList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0 5 0 0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource BorderCityListElementStyle}">
+                                    <TextBlock Style="{StaticResource CountriesCityListTxtElementStyle}" Text="{Binding country}"/>
+                                </Border>
+                                <TextBlock Grid.Row="0" Grid.Column="1" 
+                                Style="{StaticResource CitiesCityListTxtElementStyle}"
+                                Text="{Binding name}"/>
+                                <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Style="{StaticResource MainStackPanelStyle}">
+            <StackPanel Style="{StaticResource ControlsStackPanelStyle}">
+                <Label Style="{StaticResource CityNameLabelStyle}" Content="{Binding AppSettings.City}"/>
+
+                <Button Style="{StaticResource ButtonsGetWeatherStyle}"  Content="{x:Static locz:Resources.Today}" CommandParameter="{Binding ElementName=CitiesListV, Path=SelectedItem}"
+                    Command="{Binding Path=DataContext.GetWeatherCmd, RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Style="{StaticResource ButtonsGetForecastStyle}" Content="{x:Static locz:Resources.ToFiveDays}" CommandParameter="{Binding ElementName=CitiesListV, Path=SelectedItem}"
+                    Command="{Binding Path=DataContext.GetForecastCmd, RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Label Content="{x:Static locz:Resources.Language}"/>
+                <ComboBox x:Name="LangSelector" 
+                        DisplayMemberPath="UiCulture"
+                        Width="70"
+                        SelectedIndex="{Binding SelectedLang, Converter={StaticResource selectComboboxIndexConverter}}"
+                        SelectedItem="{Binding SelectedLang}"
+                        ItemsSource="{Binding Languages}"/>
+                <Button Content="OK" Command="{Binding RestartAppCmd}"/>
+
+            </StackPanel>
+            <Border Style="{StaticResource BorderContentStyle}">
+                <Border Style="{StaticResource BorderContentInnerStyle}">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="4" Opacity="0.3" BlurRadius="5"/>
+                    </Border.Effect>
+
+                    <ContentControl Content="{Binding }">
+                        <ContentControl.Style>
+                            <Style TargetType="{x:Type ContentControl}">
+                                <Setter Property="ContentTemplate" Value="{StaticResource ViewWeather}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SwitchView}" Value="0">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource ViewWeather}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SwitchView}" Value="1">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource ViewForecast}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding SwitchView}" Value="2">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource ViewInfo}" />
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+
+
+                </Border>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Window>

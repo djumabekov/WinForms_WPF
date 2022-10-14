@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="OpenWeatherWPF.Views.Weather"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenWeatherWPF.Views"
+             xmlns:locz="clr-namespace:OpenWeatherWPF.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="430">
+    <UserControl.Resources>
+        <local:IntToDayConverter
+            x:Key="intToDayConverter"/>
+        <local:IntToLongDateConverter
+            x:Key="intToLongDateConverter"/>
+        <local:IconToURLConverter
+            x:Key="iconToURLConverter"/>
+        <local:TempFloatToTempIntConverter
+            x:Key="tempFloatToTempIntConverter"/>
+        <local:SpeedDoubleToSpeedIntConverter
+            x:Key="speedDoubleToSpeedIntConverter"/>
+        <local:DegToDegWithDegSymbolConverter
+            x:Key="degToDegWithDegSymbolConverter"/>
+        <local:FeelsLikeDoubleToFeelsLikeIntConverter
+            x:Key="feelsLikeDoubleToFeelsLikeIntConverter"/>
+        <local:HumidityToHumidityWithPercentConverter
+            x:Key="humidityToHumidityWithPercentConverter"/>
+    </UserControl.Resources>
+    <Grid Width="400" Height="310">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BorderWeatherMainContentStyle}" >
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource BorderWeatherShadowMainContentStyle}">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Style="{StaticResource StackPanelWeatherMainContentStyle}">
+                    <TextBlock Text="{Binding Weather.weather[0].main}" Style="{StaticResource ConditionWeatherStyle}"/>
+                    <Image Source="{Binding Weather.weather[0].icon, Converter={StaticResource iconToURLConverter}}" Style="{StaticResource ImgWeatherStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Style="{StaticResource StackPanelWeatherMainContentStyle}">
+                    <TextBlock Text="{Binding Weather.dt, Converter={StaticResource intToDayConverter}}" Margin="0 5 0 0" Style="{StaticResource ConditionWeatherStyle}"/>
+                    <TextBlock Text="{Binding Weather.dt, Converter={StaticResource intToLongDateConverter}}"  Style="{StaticResource DateWeatherStyle}"/>
+                    <TextBlock Text="{Binding Weather.main.temp, Converter={StaticResource tempFloatToTempIntConverter}}" FontSize="60" Style="{StaticResource DateWeatherStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderWeatherLeftContentStyle}" >
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderWeatherLeftShadowContentStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.ColumnSpan="2" Content="{x:Static locz:Resources.Wind}" Style="{StaticResource WindWeatherStyle}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0"  Text="{x:Static locz:Resources.Speed}" Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Weather.wind.speed, Converter={StaticResource speedDoubleToSpeedIntConverter}}" Margin="0"  Style="{StaticResource TxtWeatherStyle}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" FontSize="12" Text="{x:Static locz:Resources.Deg}" Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock  Grid.Row="2" Grid.Column="1"  Text="{Binding Weather.wind.deg, Converter={StaticResource degToDegWithDegSymbolConverter}}" Margin="0"  Style="{StaticResource TxtWeatherStyle}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" FontSize="12" Text="{x:Static locz:Resources.Gust}"  Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" FontSize="12" Text="{Binding Weather.wind.gust}" Margin="0"  Style="{StaticResource TxtWeatherStyle}"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource BorderWeatherLeftContentStyle}">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource BorderWeatherLeftShadowContentStyle}" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static locz:Resources.Feels}" Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Weather.main.feels_like, Converter={StaticResource feelsLikeDoubleToFeelsLikeIntConverter}}" Style="{StaticResource TxtWeatherStyle}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static locz:Resources.Pressure}" Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Weather.main.pressure}" Style="{StaticResource TxtWeatherStyle}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static locz:Resources.Humidity}" Style="{StaticResource TxtWeatherStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Weather.main.humidity, Converter={StaticResource humidityToHumidityWithPercentConverter}}" Style="{StaticResource TxtWeatherStyle}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
